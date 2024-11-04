@@ -18,7 +18,7 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://eduprops.vercel.app',
     credentials: true
 }));
 app.use(cookieParser());
@@ -40,7 +40,7 @@ const server = http.createServer(app);
 // Initialize Socket.IO
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:5173', // Update this based on your front-end URL
+        origin: 'https://eduprops.vercel.app',// Update this based on your front-end URL
         methods: ['GET', 'POST'],
         credentials: true,
     },
