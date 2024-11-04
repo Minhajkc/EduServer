@@ -23,9 +23,9 @@ app.use(cors({
 }));
 app.use(cookieParser());
 
-app.use(studentRoutes);
-app.use(adminRoutes);
-app.use(mentorRoutes);
+app.use('/',studentRoutes);
+app.use('/admin',adminRoutes);
+app.use('/mentor',mentorRoutes);
 
 app.get('/', (req, res) => {
     res.cookie('username', 'JohnDoe');
