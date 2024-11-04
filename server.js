@@ -27,9 +27,10 @@ app.use(studentRoutes);
 app.use(adminRoutes);
 app.use(mentorRoutes);
 
-app.get('/backend', (req, res) => {
+app.get('/', (req, res) => {
+    res.redirect('/courses/categories')
     res.cookie('username', 'JohnDoe');
-    res.send('Cookie has been set');
+    res.send('Server Running Clear...');
 });
 
 // Create an HTTP server
