@@ -28,7 +28,6 @@ app.use(adminRoutes);
 app.use(mentorRoutes);
 
 app.get('/', (req, res) => {
-    res.redirect('/courses/categories')
     res.cookie('username', 'JohnDoe');
     res.send('Server Running Clear...');
 });
