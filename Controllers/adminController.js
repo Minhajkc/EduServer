@@ -27,15 +27,19 @@ const AdminLogin = async (req, res) => {
       const refreshToken = generateRefreshToken(admin);;
   
  
-      res.cookie('refreshToken', refreshToken, {
+      res.cookie('accessToken', accessToken, {
         httpOnly: true,
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      });
-  
-     res.cookie('accessToken',accessToken,{
+        secure: true,          // Ensures cookies are only sent over HTTPS
+        sameSite: 'none',       // Allows cookies in cross-origin requests
+        maxAge: 15 * 60 * 1000  // 15 minutes
+    });
+    
+    res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
-        maxAge: 60 * 60 * 1000, // 1 hour
-     })
+        secure: true,
+        sameSite: 'none',
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
 
      res.json({ accessToken, admin });
   

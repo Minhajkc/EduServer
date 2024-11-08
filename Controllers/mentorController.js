@@ -124,10 +124,11 @@ const Login = async (req, res) => {
         );
         
         res.cookie('accessToken', accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', 
-            maxAge: 15 * 60 * 1000, 
-        });
+          httpOnly: true,
+          secure: true,          // Ensures cookies are only sent over HTTPS
+          sameSite: 'none',       // Allows cookies in cross-origin requests
+          maxAge: 15 * 60 * 1000  // 15 minutes
+      });
 
         res.status(200).json({
             message: 'Login successful',
