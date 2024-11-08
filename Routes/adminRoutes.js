@@ -42,7 +42,7 @@ router.put('/Admin/editVideo/:courseId/:lessonId', verifyTokenAdmin, fileUpload(
 router.put('/Admin/settings',verifyTokenAdmin,AdminController.updateAdminSettings);
 router.get('/Admin/settings', verifyTokenAdmin,AdminController.getAdminSettings);
 router.post('/Admin/subscription/update-rates',verifyTokenAdmin,AdminController.updateSubscriptionRates);
-router.get('/Admin/get-rates-subscription',AdminController.getSubscriptionRates);
+router.get('/get-rates-subscription',AdminController.getSubscriptionRates);
 router.post('/Admin/ads',verifyTokenAdmin,fileUpload({
     useTempFiles: true,
     tempFileDir: '/tmp/'
