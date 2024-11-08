@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 
-router.post('/Mentor/MentorRegister', fileUpload(),async (req, res) => {
+router.post('/MentorRegister', fileUpload(),async (req, res) => {
     try {
         if (req.files && req.files.resume) {
           const fileBuffer = req.files.resume.data;
@@ -23,31 +23,31 @@ router.post('/Mentor/MentorRegister', fileUpload(),async (req, res) => {
       }
 });
 
-router.post('/Mentor/Login',mentorController.Login)
-router.post('/Mentor/password-reset/send-otp',mentorController.passwordResetSendOtp);
-router.post('/Mentor/password-reset/verify-otp',mentorController.passwordResetVerifyOtp );
-router.post('/Mentor/password-reset/reset-password',mentorController.passwordResetResetPassword );
-router.get('/Mentor/Profile',verifyTokenMentor,mentorController.getMentorProfile)
-router.post('/mentor/logout', verifyTokenMentor,mentorController.logoutMentor);
-router.post('/Mentor/mentorchat',verifyTokenMentor,mentorController.sendChatMessage);
-router.get('/Mentor/chats',verifyTokenMentor,mentorController.retrieveChatMessage);
-router.post('/Mentor/scheduleMeeting/:courseId',verifyTokenMentor,mentorController.scheduleMeet);
-router.get('/Mentor/scheduledMeets/:courseId', verifyTokenMentor, mentorController.getScheduledMeets);
-router.put('/Mentor/course/:courseId/meeting/:meetingId',verifyTokenMentor,mentorController.updateMeeting); // Update meeting
-router.delete('/Mentor/course/:courseId/meeting/:meetingId',verifyTokenMentor,mentorController.deleteMeeting)
-router.get('/Mentor/students/mystudents',verifyTokenMentor,mentorController.getStudentsByCourse);
-router.get('/Mentor/getCourseDetailsMentor',verifyTokenMentor,mentorController.getCourseDetailsMentor)
+router.post('/Login',mentorController.Login)
+router.post('/password-reset/send-otp',mentorController.passwordResetSendOtp);
+router.post('/password-reset/verify-otp',mentorController.passwordResetVerifyOtp );
+router.post('/password-reset/reset-password',mentorController.passwordResetResetPassword );
+router.get('/Profile',verifyTokenMentor,mentorController.getMentorProfile)
+router.post('/logout', verifyTokenMentor,mentorController.logoutMentor);
+router.post('/mentorchat',verifyTokenMentor,mentorController.sendChatMessage);
+router.get('/chats',verifyTokenMentor,mentorController.retrieveChatMessage);
+router.post('/scheduleMeeting/:courseId',verifyTokenMentor,mentorController.scheduleMeet);
+router.get('/scheduledMeets/:courseId', verifyTokenMentor, mentorController.getScheduledMeets);
+router.put('/course/:courseId/meeting/:meetingId',verifyTokenMentor,mentorController.updateMeeting); // Update meeting
+router.delete('/course/:courseId/meeting/:meetingId',verifyTokenMentor,mentorController.deleteMeeting)
+router.get('/students/mystudents',verifyTokenMentor,mentorController.getStudentsByCourse);
+router.get('/getCourseDetailsMentor',verifyTokenMentor,mentorController.getCourseDetailsMentor)
 
-router.put('/Mentor/addVideo/:id',verifyTokenMentor, fileUpload({
+router.put('/addVideo/:id',verifyTokenMentor, fileUpload({
   useTempFiles: true,
   tempFileDir: '/tmp/'
 }),mentorController.AddVideo)
-router.delete('/Mentor/courses/:courseId/lessons/:lessonIndex', verifyTokenMentor,mentorController.deleteLesson);
-router.put('/Mentor/editVideo/:courseId/:lessonId', verifyTokenMentor, fileUpload({
+router.delete('/courses/:courseId/lessons/:lessonIndex', verifyTokenMentor,mentorController.deleteLesson);
+router.put('/editVideo/:courseId/:lessonId', verifyTokenMentor, fileUpload({
   useTempFiles: true,
   tempFileDir: '/tmp/'
 }), mentorController.editLessonVideo);
-router.put('/Mentor/courses/:courseId/lessons/:lessonId',verifyTokenMentor,mentorController.updatelesson)
+router.put('/courses/:courseId/lessons/:lessonId',verifyTokenMentor,mentorController.updatelesson)
 
 
 module.exports = router;
