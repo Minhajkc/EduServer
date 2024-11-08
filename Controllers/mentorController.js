@@ -224,7 +224,12 @@ const getMentorProfile = async (req, res) => {
 
 const logoutMentor = async (req, res) => {
     try {
-        res.clearCookie('accessToken'); 
+      res.clearCookie('accessToken', {
+        httpOnly: true,
+        secure: true,    // Cookies are only sent over HTTPS
+        sameSite: 'none' // Allows cross-origin cookies
+    });
+
         res.status(200).json({ message: 'Logout successful' });
     } catch (error) {
         res.status(500).json({ message: 'Error logging out', error });

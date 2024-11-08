@@ -63,12 +63,12 @@ const AdminLogin = async (req, res) => {
 const Logout = async (req,res) =>{
     try {
 
-        res.cookie('accessToken', '', {
-          maxAge: 0, 
-          httpOnly: true, 
-          secure: process.env.NODE_ENV === 'production', 
-          sameSite: 'Strict' 
-        });
+      res.clearCookie('accessToken', {
+        httpOnly: true,
+        secure: true,    // Cookies are only sent over HTTPS
+        sameSite: 'none' // Allows cross-origin cookies
+    });
+
     
         res.status(200).json({ message: 'Successfully logged out' });
       } catch (error) {
