@@ -28,8 +28,8 @@ app.use(cors({
 app.use(cookieParser());
 
 app.use('/',studentRoutes);
-app.use('/admin',adminRoutes);
-app.use('/mentor',mentorRoutes);
+app.use('/Admin',adminRoutes);
+app.use('/Mentor',mentorRoutes);
 
 app.get('/', (req, res) => {
 
@@ -37,17 +37,7 @@ app.get('/', (req, res) => {
     res.send('Server Running Clear...');
 });
 
-app.get('/test-cookie', (req, res) => {
-    const data = res.cookie('test', 'hello', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        path: '/',
-        domain: '.onrender.com',
-        maxAge: 1000 * 60 * 15
-    });
-    res.json({ message: data });
-});
+
 
 
 
