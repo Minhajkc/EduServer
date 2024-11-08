@@ -114,7 +114,6 @@ const verifyOtp = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const isProduction = process.env.NODE_ENV === 'production';
     const { email, password } = req.body;
 
     try {
@@ -152,20 +151,12 @@ const login = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
           httpOnly: true,
-          secure: isProduction, // Enable secure only in production
-          sameSite: isProduction ? 'none' : 'lax', // None for production, lax for local testing
-          path: '/',
-          domain: isProduction ? '.onrender.com' : undefined, // Domain only in production
-          maxAge: 15 * 60 * 1000
+          maxAge: 15 * 60 * 1000 // 15 minutes
       });
       
       res.cookie('refreshToken', refreshToken, {
           httpOnly: true,
-          secure: isProduction,
-          sameSite: isProduction ? 'none' : 'lax',
-          path: '/',
-          domain: isProduction ? '.onrender.com' : undefined,
-          maxAge: 7 * 24 * 60 * 60 * 1000
+          maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
       });
 
         console.log('Cookies being set:', {
