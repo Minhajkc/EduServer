@@ -437,16 +437,27 @@ const getCourseFullView = async (req, res) => {
     }
 };
 
-const logout = async (req,res) =>{
-    try {
+const logout = async (req, res) => {
+  try {
+      res.clearCookie('accessToken', {
+          httpOnly: true,
+          secure: true,    // Cookies are only sent over HTTPS
+          sameSite: 'none' // Allows cross-origin cookies
+      });
 
-        res.clearCookie('accessToken'); 
-        res.clearCookie('refreshToken');
-        res.status(200).json({ message: 'Logout successful' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error logging out', error });
-    }
-}
+      res.clearCookie('refreshToken', {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none'
+      });
+
+      res.status(200).json({ message: 'Logout successful' });
+  } catch (error) {
+      console.error('Logout error:', error);
+      res.status(500).json({ message: 'Error logging out', error });
+  }
+};
+
 
 const addToCart = async (req, res) => {
     const { courseId } = req.params;
