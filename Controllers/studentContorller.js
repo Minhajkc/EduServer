@@ -88,21 +88,17 @@ const verifyOtp = async (req, res) => {
         
         res.cookie('accessToken', accessToken, {
           httpOnly: true,
+          secure: true,          // Ensures cookies are only sent over HTTPS
+          sameSite: 'none',       // Allows cookies in cross-origin requests
+          maxAge: 15 * 60 * 1000  // 15 minutes
+      });
+      
+      res.cookie('refreshToken', refreshToken, {
+          httpOnly: true,
           secure: true,
           sameSite: 'none',
-          path: '/',
-          domain: '.onrender.com',  // Changed to match your backend domain
-          maxAge: 15 * 60 * 1000
-        });
-
-        res.cookie('refreshToken', refreshToken, {
-          httpOnly: true,
-            secure: true,
-            sameSite: 'none',
-            path: '/',
-            domain: '.onrender.com',  // Changed to match your backend domain
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
+          maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      });
      
         delete otpStore[email];
 
@@ -225,21 +221,17 @@ const googleauth = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
           httpOnly: true,
-          secure: true,
-          sameSite: 'none',
-          path: '/',
-          domain: '.onrender.com',  // Changed to match your backend domain
-          maxAge: 15 * 60 * 1000
-        });
-
-        res.cookie('refreshToken', refreshToken, {
+          secure: true,          // Ensures cookies are only sent over HTTPS
+          sameSite: 'none',       // Allows cookies in cross-origin requests
+          maxAge: 15 * 60 * 1000  // 15 minutes
+      });
+      
+      res.cookie('refreshToken', refreshToken, {
           httpOnly: true,
           secure: true,
           sameSite: 'none',
-          path: '/',
-          domain: '.onrender.com',  // Changed to match your backend domain
-          maxAge: 7 * 24 * 60 * 60 * 1000
-        });
+          maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      });
 
         res.status(200).json({ message: 'Authenticated successfully!', Student:student });
     } catch (error) {
