@@ -32,13 +32,13 @@ app.use('/admin',adminRoutes);
 app.use('/mentor',mentorRoutes);
 
 app.get('/', (req, res) => {
-    console.log(process.env.NODE_ENV,'loggedenv')
+
     res.cookie('username', 'JohnDoe');
     res.send('Server Running Clear...');
 });
 
 app.get('/test-cookie', (req, res) => {
-    res.cookie('test', 'hello', {
+    const data = res.cookie('test', 'hello', {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
@@ -46,7 +46,7 @@ app.get('/test-cookie', (req, res) => {
         domain: '.onrender.com',
         maxAge: 1000 * 60 * 15
     });
-    res.json({ message: 'Test cookie set' });
+    res.json({ message: data });
 });
 
 
