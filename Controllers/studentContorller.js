@@ -149,15 +149,20 @@ const login = async (req, res) => {
         user.refreshTokenExpires = Date.now() + 30 * 24 * 60 * 60 * 1000; // 30 days
         await user.save();
 
-        res.cookie('accessToken', accessToken, {
-          httpOnly: true,
-          maxAge: 15 * 60 * 1000 // 15 minutes
-      });
-      
-      res.cookie('refreshToken', refreshToken, {
-          httpOnly: true,
-          maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-      });
+
+res.cookie('accessToken', accessToken, {
+    httpOnly: true,
+    secure: true,          // Ensures cookies are only sent over HTTPS
+    sameSite: 'none',       // Allows cookies in cross-origin requests
+    maxAge: 15 * 60 * 1000  // 15 minutes
+});
+
+res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+});
 
         console.log('Cookies being set:', {
           accessToken: Boolean(accessToken),

@@ -21,8 +21,6 @@ app.use(cors({
     origin: 'https://eduprops.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],  // Added Cookie
-    exposedHeaders: ['set-cookie']  // Add this line
 }));
 
 app.use(cookieParser());
