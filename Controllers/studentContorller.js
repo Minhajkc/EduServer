@@ -88,20 +88,20 @@ const verifyOtp = async (req, res) => {
         
         res.cookie('accessToken', accessToken, {
           httpOnly: true,
-          secure: true, // Always use secure in production
-          sameSite: 'none', // Required for cross-origin cookies
+          secure: true,
+          sameSite: 'none',
           path: '/',
-          domain: '.vercel.app', // Adjust this based on your domain
-          maxAge: 15 * 60 * 1000, // 15 minutes
+          domain: '.onrender.com',  // Changed to match your backend domain
+          maxAge: 15 * 60 * 1000
         });
 
         res.cookie('refreshToken', refreshToken, {
           httpOnly: true,
-          secure: true,
-          sameSite: 'none',
-          path: '/',
-          domain: '.vercel.app', // Adjust this based on your domain
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            secure: true,
+            sameSite: 'none',
+            path: '/',
+            domain: '.onrender.com',  // Changed to match your backend domain
+            maxAge: 7 * 24 * 60 * 60 * 1000
         });
      
         delete otpStore[email];
@@ -151,11 +151,11 @@ const login = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
           httpOnly: true,
-          secure: true, // Always use secure in production
-          sameSite: 'none', // Required for cross-origin cookies
+          secure: true,
+          sameSite: 'none',
           path: '/',
-          domain: '.vercel.app', // Adjust this based on your domain
-          maxAge: 15 * 60 * 1000, // 15 minutes
+          domain: '.onrender.com',  // Changed to match your backend domain
+          maxAge: 15 * 60 * 1000
         });
 
         res.cookie('refreshToken', refreshToken, {
@@ -163,8 +163,8 @@ const login = async (req, res) => {
           secure: true,
           sameSite: 'none',
           path: '/',
-          domain: '.vercel.app', // Adjust this based on your domain
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          domain: '.onrender.com',  // Changed to match your backend domain
+          maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
         res.status(200).json({ message: 'Login successful',Student:user });
@@ -223,11 +223,11 @@ const googleauth = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
           httpOnly: true,
-          secure: true, // Always use secure in production
-          sameSite: 'none', // Required for cross-origin cookies
+          secure: true,
+          sameSite: 'none',
           path: '/',
-          domain: '.vercel.app', // Adjust this based on your domain
-          maxAge: 15 * 60 * 1000, // 15 minutes
+          domain: '.onrender.com',  // Changed to match your backend domain
+          maxAge: 15 * 60 * 1000
         });
 
         res.cookie('refreshToken', refreshToken, {
@@ -235,8 +235,8 @@ const googleauth = async (req, res) => {
           secure: true,
           sameSite: 'none',
           path: '/',
-          domain: '.vercel.app', // Adjust this based on your domain
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          domain: '.onrender.com',  // Changed to match your backend domain
+          maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
         res.status(200).json({ message: 'Authenticated successfully!', Student:student });
