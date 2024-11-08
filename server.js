@@ -24,7 +24,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-
+app.use(cookieParser());
 
 app.use('/',studentRoutes);
 app.use('/admin',adminRoutes);
@@ -50,7 +50,7 @@ const io = new Server(server, {
         allowedHeaders: ['Content-Type', 'Authorization']
     },
 });
-app.use(cookieParser());
+
 // Socket.IO connection
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
