@@ -167,6 +167,11 @@ const login = async (req, res) => {
           maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
+        console.log('Cookies being set:', {
+          accessToken: Boolean(accessToken),
+          refreshToken: Boolean(refreshToken)
+      });
+
         res.status(200).json({ message: 'Login successful',Student:user });
     } catch (error) {
         console.error(error); // Log error details for debugging

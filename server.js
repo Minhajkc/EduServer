@@ -37,6 +37,18 @@ app.get('/', (req, res) => {
     res.send('Server Running Clear...');
 });
 
+app.get('/test-cookie', (req, res) => {
+    res.cookie('test', 'hello', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+        path: '/',
+        domain: '.onrender.com',
+        maxAge: 1000 * 60 * 15
+    });
+    res.json({ message: 'Test cookie set' });
+});
+
 
 
 // Create an HTTP server
