@@ -87,13 +87,21 @@ const verifyOtp = async (req, res) => {
         await savedStudent.save();
         
         res.cookie('accessToken', accessToken, {
-            httpOnly: true,
-            maxAge: 15 * 60 * 1000, // 15 minutes
+          httpOnly: true,
+          secure: true, // Always use secure in production
+          sameSite: 'none', // Required for cross-origin cookies
+          path: '/',
+          domain: '.vercel.app', // Adjust this based on your domain
+          maxAge: 15 * 60 * 1000, // 15 minutes
         });
 
         res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none',
+          path: '/',
+          domain: '.vercel.app', // Adjust this based on your domain
+          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
      
         delete otpStore[email];
@@ -142,15 +150,21 @@ const login = async (req, res) => {
         await user.save();
 
         res.cookie('accessToken', accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Set secure to true in production
-            maxAge: 15 * 60 * 1000, // 15 minutes
+          httpOnly: true,
+          secure: true, // Always use secure in production
+          sameSite: 'none', // Required for cross-origin cookies
+          path: '/',
+          domain: '.vercel.app', // Adjust this based on your domain
+          maxAge: 15 * 60 * 1000, // 15 minutes
         });
 
         res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', 
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none',
+          path: '/',
+          domain: '.vercel.app', // Adjust this based on your domain
+          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
         res.status(200).json({ message: 'Login successful',Student:user });
@@ -208,15 +222,21 @@ const googleauth = async (req, res) => {
         await student.save(); // Save the user with updated tokens
 
         res.cookie('accessToken', accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 15 * 60 * 1000, // 15 minutes
+          httpOnly: true,
+          secure: true, // Always use secure in production
+          sameSite: 'none', // Required for cross-origin cookies
+          path: '/',
+          domain: '.vercel.app', // Adjust this based on your domain
+          maxAge: 15 * 60 * 1000, // 15 minutes
         });
 
         res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none',
+          path: '/',
+          domain: '.vercel.app', // Adjust this based on your domain
+          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
         res.status(200).json({ message: 'Authenticated successfully!', Student:student });

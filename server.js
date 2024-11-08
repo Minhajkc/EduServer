@@ -19,15 +19,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: 'https://eduprops.vercel.app',
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(cookieParser());
+
+
 
 app.use('/',studentRoutes);
 app.use('/admin',adminRoutes);
 app.use('/mentor',mentorRoutes);
 
 app.get('/', (req, res) => {
+    console.log(process.env.NODE_ENV,'loggedenv')
     res.cookie('username', 'JohnDoe');
     res.send('Server Running Clear...');
 });
@@ -40,12 +44,13 @@ const server = http.createServer(app);
 // Initialize Socket.IO
 const io = new Server(server, {
     cors: {
-        origin: 'https://eduprops.vercel.app',// Update this based on your front-end URL
-        methods: ['GET', 'POST'],
+        origin: 'https://eduprops.vercel.app',
         credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization']
     },
 });
-
+app.use(cookieParser());
 // Socket.IO connection
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
