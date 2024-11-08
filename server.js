@@ -48,7 +48,6 @@ const io = new Server(server, {
         origin: 'https://eduprops.vercel.app',
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization']
     },
 });
 
